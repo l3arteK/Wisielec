@@ -13,13 +13,19 @@ public class Wisielec  implements ActionListener {
     static String haslo = "KO";
     static JButton[] buttons = new JButton[3];
     JPanel buttons_panel = new JPanel();
-    static char[] zgad = new char[haslo.length()];
     static char[] odp = new char[3];
     static int n;
-    static int k = zgad.length;
     static int life = 3;
-    Wisielec()
+    static int zycie_poczatkowe;
+    static int k;
+    static char[] zgad;
+    Wisielec(String wyraz, int zycia)
     {
+       haslo = wyraz;
+       life = zycia;
+       zycie_poczatkowe = zycia;
+        zgad = new char[haslo.length()];
+        k = zgad.length;
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(1200,600);
       frame.getContentPane().setBackground(new Color(75,102,20));
@@ -90,6 +96,7 @@ public class Wisielec  implements ActionListener {
             }
         }
     }
+
     public static void showed()
     {
         String wyswietlane;
@@ -139,7 +146,7 @@ public class Wisielec  implements ActionListener {
     }
 
     public static void restart(){
-        life = 3;
+        life = zycie_poczatkowe;
         for(int i=0;i<haslo.length();i++){
             zgad[i]='_';
         }

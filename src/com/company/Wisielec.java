@@ -5,19 +5,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-public class Wisielec implements ActionListener {
+public class Wisielec  implements ActionListener {
 
-    JFrame frame = new JFrame();
-    JLabel result = new JLabel();
-    JLabel life_label = new JLabel();
-    String haslo = "KO";
-    JButton[] buttons = new JButton[3];
+    static JFrame frame = new JFrame();
+    static JLabel result = new JLabel();
+    static JLabel life_label = new JLabel();
+    static String haslo = "KO";
+    static JButton[] buttons = new JButton[3];
     JPanel buttons_panel = new JPanel();
-    char[] zgad = new char[haslo.length()];
-    char[] odp = new char[3];
-    int n;
-    int k = zgad.length;
-    int life = 3;
+    static char[] zgad = new char[haslo.length()];
+    static char[] odp = new char[3];
+    static int n;
+    static int k = zgad.length;
+    static int life = 3;
     Wisielec()
     {
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,9 +40,6 @@ public class Wisielec implements ActionListener {
       result.setOpaque(true);
       result.setPreferredSize(new Dimension(1100,200));
 
-      for(int i=0;i<haslo.length();i++){
-          zgad[i]='_';
-      }
 
     for(int i=0;i<3;i++){
         buttons[i] = new JButton();
@@ -58,12 +55,11 @@ public class Wisielec implements ActionListener {
 
 
 
-      generowanie_odp();
+
       frame.add(life_label);
       frame.add(result);
       frame.add(buttons_panel);
-      show();
-
+      restart();
 
     }
 
@@ -73,7 +69,7 @@ public class Wisielec implements ActionListener {
             if(e.getSource() == buttons[i]){
                 if(buttons[i].getText().charAt(0)==odp[n]){
                     zgad[find(odp[n])] = odp[n];
-                    show();
+                    showed();
                     if(k!=1){
                     generowanie_odp();
                     k-=1;
@@ -85,16 +81,16 @@ public class Wisielec implements ActionListener {
                 {
                     life-=1;
                     generowanie_odp();
-                    show();
+                    showed();
                 }else{
                     life-=1;
-                    show();
+                    showed();
                     new newWindow(false);
                 }
             }
         }
     }
-    public void show()
+    public static void showed()
     {
         String wyswietlane;
         result.setText("");
@@ -105,7 +101,7 @@ public class Wisielec implements ActionListener {
         life_label.setText("Lifes: "+life);
 
     }
-    public void generowanie_odp()
+    public static void generowanie_odp()
     {
         Random rand = new Random();
          n = rand.nextInt(3);
@@ -133,7 +129,7 @@ public class Wisielec implements ActionListener {
 
         }
     }
-    public int find(char x){
+    public static int find(char x){
         for(int i=0;i<haslo.length();i++){
             if(x==haslo.charAt(i)){
                 return i;
@@ -141,4 +137,15 @@ public class Wisielec implements ActionListener {
         }
         return -1;
     }
+
+    public static void restart(){
+        life = 3;
+        for(int i=0;i<haslo.length();i++){
+            zgad[i]='_';
+        }
+        showed();
+        generowanie_odp();
+        k = zgad.length;
+    }
 }
+

@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
-
 public class MenuWindow extends JFrame implements ActionListener {
 
     JLabel[] napis = new JLabel[3];
@@ -54,9 +53,38 @@ public class MenuWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == button){
-            new Wisielec(dane[0].getText().toUpperCase(Locale.ROOT),Integer.parseInt(dane[1].getText()));
-            this.dispose();
+            boolean inwalidacja = false;
+            String haslo = dane[0].getText();
+            String zycia = dane[1].getText();
+            if(!dane[0].getText().isBlank() && !dane[1].getText().isBlank()) {
+                for (int i = 0; i < haslo.length(); i++) {
+                    System.out.println(i);
+                    if(!isCharacter(haslo.charAt(i))) {
+                        inwalidacja = false;
+                        break;
+                    }else
+                        inwalidacja = true;
+                }if(inwalidacja){
+                    for(int i=0;i<zycia.length();i++)
+                    {
+                        if(isCharacter(zycia.charAt(i))){
+                            inwalidacja = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(inwalidacja) {
+                new Wisielec(dane[0].getText().toUpperCase(Locale.ROOT), Integer.parseInt(dane[1].getText()));
+                this.dispose();
+            }
         }
 
+    }
+
+    public boolean isCharacter(char n){
+        System.out.println((int) n);
+        System.out.println((((int) n >= 65 && (int) n <= 90) || ((int) n >= 97 && (int) n <= 122)));
+        return (((int) n >= 65 && (int) n <= 90) || ((int) n >= 97 && (int) n <= 122));
     }
 }

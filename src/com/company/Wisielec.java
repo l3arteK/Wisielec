@@ -7,13 +7,13 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 public class Wisielec  implements ActionListener {
 
-    static JFrame frame = new JFrame();
-    static JLabel result = new JLabel();
-    static JLabel life_label = new JLabel();
-    static String haslo = "KO";
-    static JButton[] buttons = new JButton[3];
-    JPanel buttons_panel = new JPanel();
-    static char[] odp = new char[3];
+    static JFrame frame;
+    static JLabel result;
+    static JLabel life_label;
+    static String haslo;
+    static JButton[] buttons;
+    JPanel buttons_panel;
+    static char[] odp;
     static int n;
     static int life = 3;
     static int zycie_poczatkowe;
@@ -21,6 +21,12 @@ public class Wisielec  implements ActionListener {
     static char[] zgad;
     Wisielec(String wyraz, int zycia)
     {
+        frame = new JFrame();
+         result = new JLabel();
+         life_label = new JLabel();
+         buttons = new JButton[3];
+         buttons_panel = new JPanel();
+         odp = new char[3];
        haslo = wyraz;
        life = zycia;
        zycie_poczatkowe = zycia;
